@@ -12,9 +12,25 @@ output:
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
-## DebOps for Data Science
+## DevOps for Data Science
 
-Data Science Platforms are complex! How do we solve the data analysis issues of collaboration, sharing, scalability, and reproducibility?
+Data Science Platforms are complex! How do we solve the data analysis issues of:  
+
+* collaboration,  
+* sharing,  
+* scalability, and  
+* reproducibility?  
+
+DevOps (development + operations) has been revolutionized by containers and methods of orchestrating containers. Specifically, we will examing two technologies which are changing how complex software systems are built, deployed, and maintained. These are:  
+
+* Docker: a technology for building and deploying container images;  
+* Kubernetes: a technology for deploying, scaling, and managing containerized applications. 
+
+These technologies form the basis for solving the data analysis issues mentioned above.
+
+Note: Docker Swarm can also be used to orchestrate containers, but Kubernetes dominates containerized cloud deployments.
+
+
 
 ## Docker
 
@@ -83,6 +99,13 @@ These and other available images provide a large number of use cases.
 
 ## Extending Images
 
+A developer or user may find that an image needs to be extended, e.g., a critical R package is missing or needs to be updated. This can be done in one of two ways:  
+
+* install the R package inside the container using `install.packages`, or 
+* rebuild the image by modifying the `Dockerfile`.
+
+A user typically can only install packages and wait for a new distribution, e.g., on Docker Hub. A developer should update the Dockerfile as soon as possible and push the newly built image to Docker Hub.
+
 ## Rocker Deployment
 
 Any of the Rocker images can be deployed in a single container. This container can be run on your laptop, on your departmental server, or on a cloud platform such as AWS. Although the Rocker images can be built from their GitHub sources, typically the pre-built images on Docker Hub are simply downloaded and run.
@@ -105,7 +128,7 @@ Docker is a platform for containerized networking, compute, and storage for dist
 
 ## A Modern Data Science Platform
 
-![](figures/StreamArch.png)
+![Streaming Architecture](figures/StreamArch.png)
 
 ## Container Platform
 
@@ -121,6 +144,8 @@ Rspark has other images commonly used in data science:
 * Hadoop: a distributed storage (HDFS) and computing (MapReduce) environment;  
 * Hive: a distributed data warehouse built on HDFS;  
 * Spark: a cluster version for distributed computing.
+
+Note: Rspark could be built using RCloud rather than RStudio as an interface to R. RCloud is built on a lower-level image, i.e., `rocker/drd` than the `rocker/verse` image used in Rspark.
 
 ## Kubernetes
 
