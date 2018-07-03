@@ -12,13 +12,17 @@ output:
 knitr::opts_chunk$set(echo = FALSE)
 ```
 
+## DebOps for Data Science
+
+Data Science Platforms are complex! How do we solve the data analysis issues of collaboration, sharing, scalability, and reproducibility?
+
 ## Docker
 
 Docker containers are becoming essential for software development and for the deployment of complex computing environments. This talk presents two Docker solutions to address these and other use cases relevant to statisticians and data scientists.
 
-- Rocker: a suite of R-based images built by and hosted on Docker Hab
+- Rocker: a suite of R-based images built by and hosted on Docker Hub
 
-- RSpark: a suite of Spark-based images hosted on Docker Hub
+- RSpark: a suite of R and Spark-based images hosted on Docker Hub
 
 Perhaps the most important reason for using Docker by statisticians and data scientists is the complexity of their computing environments, e.g., aligning version numbers for R and its packages, drivers, SQL and NoSQL databases, Hadoop, Spark and its packages, etc.
 
@@ -89,7 +93,13 @@ Suppose you are writing a paper and you want it to be truly reproducible. At thi
 
 But the reasons go well beyond reproducibility.
 
-## Continuous Integration (CI) and Continuous Deployment (CD) [DEVOPS]
+## Using Docker for Continuous Integration Deployment [DevOps]
+
+Docker is a platform for containerized networking, compute, and storage for distributed applications.  
+
+* Velocity  
+* Variation  
+* Visualization  
 
 [CI/CD](https://www.docker.com/sites/default/files/WP_Docker%20and%20the%203%20ways%20devops.pdf)
 
