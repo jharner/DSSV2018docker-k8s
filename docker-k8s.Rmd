@@ -75,9 +75,31 @@ The most important to us are:
 * shiny  
 * ml  
 
+These and other available images provide a large number of use cases.
+
+## Extending Images
+
+## Rocker Deployment
+
+Any of the Rocker images can be deployed in a single container. This container can be run on your laptop, on your departmental server, or on a cloud platform such as AWS. Although the Rocker images can be built from their GitHub sources, typically the pre-built images on Docker Hub are simply downloaded and run.
+
+Why go to this trouble? Why not just run RStudio locally or on a server?  
+
+Suppose you are writing a paper and you want it to be truly reproducible. At this point you want to capture and maintain not only the Rmd or Rnw files, but also the synchronized R and required package versions. Further, the R environment can be synchronized with Linux distro and version along with required storage platform for your data. 
+
+But the reasons go well beyond reproducibility.
+
+## Continuous Integration (CI) and Continuous Deployment (CD) [DEVOPS]
+
+[CI/CD](https://www.docker.com/sites/default/files/WP_Docker%20and%20the%203%20ways%20devops.pdf)
+
 ## A Modern Data Science Platform
 
 ![](figures/StreamArch.png)
+
+## Container Platform
+
+[Container Platform](https://www.docker.com/what-docker#/container-platform)
 
 ## Rspark Project
 
@@ -91,6 +113,9 @@ Rspark has other images commonly used in data science:
 * Spark: a cluster version for distributed computing.
 
 ## Kubernetes
+
+
+
 
 
 
