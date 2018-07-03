@@ -1,0 +1,100 @@
+---
+title: "Are Containers the Future of Computing?"
+author: "Jim Harner"
+date: "July 2, 2018"
+output:
+  slidy_presentation: default
+  beamer_presentation: default
+  ioslides_presentation: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+## Docker
+
+Docker containers are becoming essential for software development and for the deployment of complex computing environments. This talk presents two Docker solutions to address these and other use cases relevant to statisticians and data scientists.
+
+- Rocker: a suite of R-based images built by and hosted on Docker Hab
+
+- RSpark: a suite of Spark-based images hosted on Docker Hub
+
+Perhaps the most important reason for using Docker by statisticians and data scientists is the complexity of their computing environments, e.g., aligning version numbers for R and its packages, drivers, SQL and NoSQL databases, Hadoop, Spark and its packages, etc.
+
+## What is Docker?
+
+Docker allows developers, devops, and sysadmins to **develop**, **deploy**, and **run** applications using containers. We call this **containerization**.
+
+Containers are:
+
+* Flexible  
+* Lightweight  
+* Portable  
+* Scalable
+
+A container runs natively on Linux and shares the kernel of the host machine with other containers. A container runs as a discrete process and thus its memory requirements are nearly equivalent to other executables, i.e., it is lightweight. On the other hand, a virtual machine runs a guest OS which is built on a hypervisor, through which host resources are accessed. Running multiple VMs is very heavy. 
+
+## Images and Containers
+
+The two principal Docker entities are:
+
+* Image: an executable package that includes everything needed to run an application  
+* Container: a runtime instance of an image
+
+The image contains the code, configuration files, environmental variables, libraries, and the runtime. You can see the images by running:
+```
+docker images
+```
+A comtainer is an image with state, i.e., a user process. You can view the running containers by executing:
+```
+docker ps
+```
+You can run an image by:
+```
+docker run hello-world
+```
+or more ambitiously:
+```
+docker run --rm -ti rocker/r-base bash
+```
+
+## Rocker Project
+
+Rocker project: a widely-used suite of Docker images with customized R environments for particular tasks.
+
+Currently, there are 17 repos in [rocker-org](https://github.com/rocker-org).
+
+The most important to us are:  
+
+* [rocker-versioned](https://github.com/rocker-org)
+    + r-ver: versioned base R  
+    + rstudio: adds rstudio  
+    + tidyverse: adds tidyverse and devtools   
+    + verse: adds tex and publishing packages    
+* shiny  
+* ml  
+
+## A Modern Data Science Platform
+
+![](figures/StreamArch.png)
+
+## Rspark Project
+
+Rspark extends Rocker to embrace big-data platforms. In particular, Rspark's main image, `rstudio` is built on Rocker's `verse` image, which contains RStudio, the Tidyverse, LaTeX, etc. Various data science R packages are added to this image, e.g., `sparklyr`, `SparkR`, `tensorflow`, `rhipe`, etc.
+
+Rspark has other images commonly used in data science:  
+
+* PostgreSQL: a powerful relational database;  
+* Hadoop: a distributed storage (HDFS) and computing (MapReduce) environment;  
+* Hive: a distributed data warehouse built on HDFS;  
+* Spark: a cluster version for distributed computing.
+
+## Kubernetes
+
+
+
+
+
+
+
