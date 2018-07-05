@@ -17,20 +17,17 @@ knitr::opts_chunk$set(echo = FALSE)
 Data Science Platforms are complex! How do we solve the data analysis issues of:  
 
 * collaboration,  
-* sharing,  
+* sharing, 
+* reliability  
 * scalability, and  
 * reproducibility?  
 
 DevOps (development + operations) has been revolutionized by containers and methods of orchestrating containers. Specifically, we will examing two technologies which are changing how complex software systems are built, deployed, and maintained. These are:  
 
-* Docker: a technology for building and deploying container images;  
+* Docker: a technology for building, deploying, and running container images;  
 * Kubernetes: a technology for deploying, scaling, and managing containerized applications. 
 
-These technologies form the basis for solving the data analysis issues mentioned above.
-
-Note: Docker Swarm can also be used to orchestrate containers, but Kubernetes dominates containerized cloud deployments.
-
-
+These technologies form the basis for solving the data analysis issues mentioned above. Docker Swarm is also an orchestation option, but not as scalable or feature complete as Kubernetes.
 
 ## Docker
 
@@ -40,7 +37,7 @@ Docker containers are becoming essential for software development and for the de
 
 - RSpark: a suite of R and Spark-based images hosted on Docker Hub
 
-Perhaps the most important reason for using Docker by statisticians and data scientists is the complexity of their computing environments, e.g., aligning version numbers for R and its packages, drivers, SQL and NoSQL databases, Hadoop, Spark and its packages, etc.
+Perhaps the most important reason for using Docker by statisticians and data scientists is the complexity of their computing environments, e.g., aligning version numbers for R and its packages, drivers, SQL and NoSQL databases, Hadoop, Spark and its packages, TensorFlow and GPUs, etc.
 
 ## What is Docker?
 
@@ -74,10 +71,7 @@ You can run an image by:
 ```
 docker run hello-world
 ```
-or more ambitiously:
-```
-docker run --rm -ti rocker/r-base bash
-```
+If the `hello-world` image is not found locally, it is automatically downloaded and launched from Docker Hub, the default image registry.
 
 ## Rocker Project
 
@@ -97,6 +91,14 @@ The most important to us are:
 
 These and other available images provide a large number of use cases.
 
+## Running R/Rstudio in Containers
+
+A terminal version of R can be run in `r-base` or `r-ver`.
+```
+docker run --rm -ti rocker/r-base bash
+```
+The `rocker/r-base` image is downloaded from Docker Hub (if not already in the local filesystem) and run. The `-it` flags cause a `bash` session to start. Typing R into the terminal starts R (currently version 3.5). The `-rm` flag causes the container to be removed when the session is exited.
+
 ## Extending Images
 
 A developer or user may find that an image needs to be extended, e.g., a critical R package is missing or needs to be updated. This can be done in one of two ways:  
@@ -104,7 +106,9 @@ A developer or user may find that an image needs to be extended, e.g., a critica
 * install the R package inside the container using `install.packages`, or 
 * rebuild the image by modifying the `Dockerfile`.
 
-A user typically can only install packages and wait for a new distribution, e.g., on Docker Hub. A developer should update the Dockerfile as soon as possible and push the newly built image to Docker Hub.
+The first method results in mutable infrastructure, i.e., changes are made incrementally. The state of the infrastructure is thus dependent on incremental updates. This method should only be used in critical situations and should be viewed as a temporary fix.
+
+The second method results on an immmutable infrastructure, i.e., the state does not change based on actions by the user. Rather, the image is completely rebuilt by the developer.
 
 ## Rocker Deployment
 
@@ -118,13 +122,13 @@ But the reasons go well beyond reproducibility.
 
 ## Using Docker for Continuous Integration Deployment [DevOps]
 
-Docker is a platform for containerized networking, compute, and storage for distributed applications.  
+Docker is a platform for containerized networking, compute, and storage for distributed applications. Docker improves: 
 
-* Velocity  
-* Variation  
-* Visualization  
+* Velocity: increase flow by continuous integration (CI) and continuous delivery (CD);    
+* Variation: converge artifacts with immmtable binaries;  
+* Visualization: visualize (elevate) services in the pipeline by bounding context and using containers for isolation.   
 
-[CI/CD](https://www.docker.com/sites/default/files/WP_Docker%20and%20the%203%20ways%20devops.pdf)
+[Reference paper on CI/CD](https://www.docker.com/sites/default/files/WP_Docker%20and%20the%203%20ways%20devops.pdf)
 
 ## A Modern Data Science Platform
 
@@ -148,6 +152,7 @@ Rspark has other images commonly used in data science:
 Note: Rspark could be built using RCloud rather than RStudio as an interface to R. RCloud is built on a lower-level image, i.e., `rocker/drd` than the `rocker/verse` image used in Rspark.
 
 ## Kubernetes
+
 
 
 
