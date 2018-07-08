@@ -24,18 +24,18 @@ Data Science Platforms are complex! How do we solve the data analysis issues of:
 
 DevOps (development + operations) has been revolutionized by containers and methods of orchestrating containers. Specifically, we will examing two technologies which are changing how complex software systems are built, deployed, and maintained. These are:  
 
-* Docker: a technology for building, deploying, and running container images;  
-* Kubernetes: a technology for deploying, scaling, and managing containerized applications. 
+* [Docker](https://www.docker.com): a technology for building, deploying, and running container images;  
+* [Kubernetes](https://kubernetes.io): a technology for deploying, scaling, and managing containerized applications. 
 
-These technologies form the basis for solving the data analysis issues mentioned above. Docker Swarm is also an orchestation option, but not as scalable or feature complete as Kubernetes.
+These technologies form the basis for solving the data analysis issues mentioned above. Docker Swarm is also an orchestation option, but not as scalable or feature complete as Kubernetes. At the other extreme, Mesos is for urge containerization deployments.
 
 ## Docker
 
 Docker containers are becoming essential for software development and for the deployment of complex computing environments. This talk presents two Docker solutions to address these and other use cases relevant to statisticians and data scientists.
 
-- Rocker: a suite of R-based images built by and hosted on Docker Hub
+- [Rocker](https://www.rocker-project.org): a suite of R-based images built by and hosted on Docker Hub
 
-- RSpark: a suite of R and Spark-based images hosted on Docker Hub
+- [RSpark](https://github.com/jharner/rspark): a suite of R and Spark-based images hosted on Docker Hub
 
 Perhaps the most important reason for using Docker by statisticians and data scientists is the complexity of their computing environments, e.g., aligning version numbers for R and its packages, drivers, SQL and NoSQL databases, Hadoop, Spark and its packages, TensorFlow and GPUs, etc.
 
@@ -63,7 +63,7 @@ The image contains the code, configuration files, environmental variables, libra
 ```
 docker images
 ```
-A comtainer is an image with state, i.e., a user process. You can view the running containers by executing:
+A container is an image with state, i.e., a user process. You can view the running containers by executing:
 ```
 docker ps
 ```
@@ -71,7 +71,7 @@ You can run an image by:
 ```
 docker run hello-world
 ```
-If the `hello-world` image is not found locally, it is automatically downloaded and launched from Docker Hub, the default image registry.
+If the `hello-world` image is not found locally, it is automatically downloaded and launched from [Docker Hub](https://hub.docker.com), the default image registry.
 
 ## Rocker Project
 
@@ -152,6 +152,14 @@ Rspark has other images commonly used in data science:
 Note: Rspark could be built using RCloud rather than RStudio as an interface to R. RCloud is built on a lower-level image, i.e., `rocker/drd` than the `rocker/verse` image used in Rspark.
 
 ## Kubernetes
+
+Kubernetes is a system for running and coordinating related containerized applications across a cluster of (typically virtual) machines. It is a platform that manages the complete lifecycles of containerized applications and services to provide:  
+
+* predictability  
+* scalability  
+* availabilty  
+
+
 
 
 
