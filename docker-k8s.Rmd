@@ -134,7 +134,6 @@ Docker is a platform for containerized networking, compute, and storage for dist
 
 ![Streaming Architecture](figures/StreamArch.png)
 
-## Container Platform
 
 [Container Platform](https://www.docker.com/what-docker#/container-platform)
 
@@ -153,11 +152,55 @@ Note: Rspark could be built using RCloud rather than RStudio as an interface to 
 
 ## Kubernetes
 
-Kubernetes is a system for running and coordinating related containerized applications across a cluster of (typically virtual) machines. It is a platform that manages the complete lifecycles of containerized applications and services to provide:  
+[Kubernetes](https://www.digitalocean.com/community/tutorials/an-introduction-to-kubernetes) is a platform for running and coordinating related containerized applications across a cluster of (typically virtual) machines. It manages the complete lifecycles of containerized applications and services to provide:  
 
 * predictability  
+* reliability
 * scalability  
 * availabilty  
+
+Container and Kubernetes developers should adhere to certain principles:  
+
+* immutable infrasructure: update an image with a newer image in a single operation, i.e., no incremantal updates (except in emergencies);  
+* declarative configuration: describe the desired state of your application.
+
+In mutable infrastructures changes are applied incremetally, e.g., `apt-get` in Linux or `install.packages` in R. This should only be done as a temporary fix. An imperative declaration defines the state as a series of actions rather than a declaration of the desired state as is done with Kubernetes.
+
+Kubernetes make sure the actual state or your environment is aligned with the desired state. Not only that, Kubernetes is an online, self-healing system, i.e., it continuously takes action to ensure the current state matches the desired state.
+
+## Kubernetes Architecture
+
+The machines in a Kubernetes cluster are classified as:
+
+* a master server (or several servers): the primary point of contact with the cluster. It exposes the API, aligns the actual state to the desired state, schedules work, orchestrates communication, etc.  
+* nodes: servers responsible for running workloads using local and external resources.
+
+The API server is the management point of the cluster, e.g., for configuring Kubernetes workloads and organizational units. The API interface is RESTful. A CLI client called `kubectl` is the default method of interacting with the Kubernetes cluster from a local computer.
+
+The basic Kubernetes unit is the pod. Containers are assigned to pods---not hosts. Pods should contain a single application or related applications, e.g., one that need to share the same filesystem.
+
+## Container Platform
+
+A container platform provides a complete solution, e.g., the components needed for teaching a data science program---perhaps a subset of the above streaming architecture.
+
+[Container Platform](https://www.docker.com/what-docker#/container-platform)
+
+
+## RSpark on Kubernetes
+
+RSpark is being deployed to [Digital Ocean Kubernetes](https://www.digitalocean.com/products/kubernetes/).  
+
+Kubernetes is now available on AWS, Azure, and of course Google Cloud. However, these cloud providers do not have predictable price models and users/developers can incur large unexpected costs. Digital Ocean gives the user far more control over these costs, i.e., limits can be set and the user is only charged for what is actually used.
+
+That said---it would be easy to deplay RSpark to any cloud provider using Kubernetes.
+
+But why is Kubernetes necessary? Primarily scalability and reliability. For example, the Spark cluster component can be scaled based on the user's needs.
+
+
+
+
+
+
 
 
 
