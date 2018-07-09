@@ -22,12 +22,12 @@ Data Science Platforms are complex! How do we solve the data analysis issues of:
 * scalability, and  
 * reproducibility?  
 
-DevOps (development + operations) has been revolutionized by containers and methods of orchestrating containers. Specifically, we will examing two technologies which are changing how complex software systems are built, deployed, and maintained. These are:  
+DevOps (development + operations) has been revolutionized by containers and methods of orchestrating containers. Specifically, we will examine two technologies which are changing how complex software systems are built, deployed, and maintained. These are:  
 
 * [Docker](https://www.docker.com): a technology for building, deploying, and running container images;  
 * [Kubernetes](https://kubernetes.io): a technology for deploying, scaling, and managing containerized applications. 
 
-These technologies form the basis for solving the data analysis issues mentioned above. Docker Swarm is also an orchestation option, but not as scalable or feature complete as Kubernetes. At the other extreme, Mesos is for huge containerization deployments.
+These technologies form the basis for solving the data analysis issues mentioned above. Docker Swarm is also an orchestration option, but not as scalable or feature complete as Kubernetes. At the other extreme, Mesos is for huge containerization deployments.
 
 ## Docker
 
@@ -99,6 +99,18 @@ docker run --rm -ti rocker/r-base bash
 ```
 The `rocker/r-base` image is downloaded from Docker Hub (if not already in the local filesystem) and run. The `-it` flags cause a `bash` session to start. Typing R into the terminal starts R (currently version 3.5). The `-rm` flag causes the container to be removed when the session is exited.
 
+Or just:
+```
+docker run --rm -ti rocker/r-base
+```
+
+RStudio can be run by:
+```
+docker run --rm -p 8787:8787 rocker/rstudio
+```
+Open a browser with the URL `localhost:8787` and signin with user/password: `rstudio/rstudio`.
+
+
 ## Extending Images
 
 A developer or user may find that an image needs to be extended, e.g., a critical R package is missing or needs to be updated. This can be done in one of two ways:  
@@ -108,7 +120,7 @@ A developer or user may find that an image needs to be extended, e.g., a critica
 
 The first method results in mutable infrastructure, i.e., changes are made incrementally. The state of the infrastructure is thus dependent on incremental updates. This method should only be used in critical situations and should be viewed as a temporary fix.
 
-The second method results on an immmutable infrastructure, i.e., the state does not change based on actions by the user. Rather, the image is completely rebuilt by the developer.
+The second method results on an immutable infrastructure, i.e., the state does not change based on actions by the user. Rather, the image is completely rebuilt by the developer.
 
 ## Rocker Deployment
 
@@ -125,7 +137,7 @@ But the reasons go well beyond reproducibility.
 Docker is a platform for containerized networking, compute, and storage for distributed applications. Docker improves: 
 
 * Velocity: increase flow by continuous integration (CI) and continuous delivery (CD);    
-* Variation: converge artifacts with immmtable binaries;  
+* Variation: converge artifacts with immutable binaries;  
 * Visualization: visualize (elevate) services in the pipeline by bounding context and using containers for isolation.   
 
 [Reference paper on CI/CD](https://www.docker.com/sites/default/files/WP_Docker%20and%20the%203%20ways%20devops.pdf)
@@ -139,16 +151,16 @@ Docker is a platform for containerized networking, compute, and storage for dist
 
 ## Rspark Project
 
-Rspark extends Rocker to embrace big-data platforms. In particular, Rspark's main image, `rstudio` is built on Rocker's `verse` image, which contains RStudio, the Tidyverse, LaTeX, etc. Various data science R packages are added to this image, e.g., `sparklyr`, `SparkR`, `tensorflow`, `rhipe`, etc.
+RSpark extends Rocker to embrace big-data platforms. In particular, RSpark's main image, `rstudio` is built on Rocker's `verse` image, which contains RStudio, the Tidyverse, LaTeX, etc. Various data science R packages are added to this image, e.g., `sparklyr`, `SparkR`, `tensorflow`, `rhipe`, etc.
 
-Rspark has other images commonly used in data science:  
+RSpark has other images commonly used in data science:  
 
 * PostgreSQL: a powerful relational database;  
 * Hadoop: a distributed storage (HDFS) and computing (MapReduce) environment;  
 * Hive: a distributed data warehouse built on HDFS;  
 * Spark: a cluster version for distributed computing.
 
-Note: Rspark could be built using RCloud rather than RStudio as an interface to R. RCloud is built on a lower-level image, i.e., `rocker/drd` than the `rocker/verse` image used in Rspark.
+Note: RSpark could be built using RCloud rather than RStudio as an interface to R. RCloud is built on a lower-level image, i.e., `rocker/drd` than the `rocker/verse` image used in RSpark.
 
 We can scale the Spark deployment to multiple workers in RSpark. But how do we scale RSpark to a large number of workers for Spark and possibly HDFS/Hive?
 
@@ -165,10 +177,10 @@ We can scale the Spark deployment to multiple workers in RSpark. But how do we s
 
 Container and Kubernetes developers should adhere to certain principles:  
 
-* immutable infrasructure: update an image with a newer image in a single operation, i.e., no incremantal updates (except in emergencies);  
+* immutable infrastructure: update an image with a newer image in a single operation, i.e., no incremental updates (except in emergencies);  
 * declarative configuration: describe the desired state of your application.
 
-In mutable infrastructures changes are applied incremetally, e.g., `apt-get` in Linux or `install.packages` in R. This should only be done as a temporary fix. An imperative declaration defines the state as a series of actions rather than a declaration of the desired state as is done with Kubernetes.
+In mutable infrastructures changes are applied incrementally, e.g., `apt-get` in Linux or `install.packages` in R. This should only be done as a temporary fix. An imperative declaration defines the state as a series of actions rather than a declaration of the desired state as is done with Kubernetes.
 
 Kubernetes makes sure the actual state of your environment is aligned with the desired state. Not only that, Kubernetes is an online, self-healing system, i.e., it continuously takes action to ensure the current state matches the desired state.
 
@@ -198,7 +210,7 @@ RSpark is being deployed to [Digital Ocean Kubernetes](https://www.digitalocean.
 
 Kubernetes is now available on AWS, Azure, and of course Google Cloud as a service. However, these cloud providers do not have predictable price models and users/developers can incur large unexpected costs. Digital Ocean gives the user far more control over these costs, i.e., limits can be set and the user is only charged for what is actually used.
 
-That said---it would be easy to deplay RSpark to any cloud provider using Kubernetes.
+That said---it would be easy to deploy RSpark to any cloud provider using Kubernetes.
 
 But why is Kubernetes necessary for RSpark? Primarily scalability and reliability. For example, the Spark cluster component can be scaled indefinitely based on the user's needs.
 
